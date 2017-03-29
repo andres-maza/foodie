@@ -10,18 +10,35 @@ YelpService.findOptions = (lat, lng, term, delivery) => {
     .then((response) => {
       const client = yelp.client(response.jsonBody.access_token);
 
-      client.search({
-        term: `${term}`,
-        location: `${lat}, ${lng}`,
-        radius: 500,
-        open_now: true
-      })
-      .then((results) => {
-        return resolve(results.jsonBody.businesses);
-      })
-      .catch((err) => {
-        return reject(err);
-      });
+      // If delivery exists, run transactionSearch, else just search.
+      if (delivery) {
+        client.transactionSearch('delivery', {
+          term: `${term}`,
+          location: `${lat}, ${lng}`,
+          radius: 1000,
+          open_now: true
+        })
+        .then((results) => {
+          return resolve(results.jsonBody.businesses);
+        })
+        .catch((err) => {
+          return reject(err);
+        });
+      } else {
+        client.search({
+          term: `${term}`,
+          location: `${lat}, ${lng}`,
+          radius: 500,
+          open_now: true
+        })
+        .then((results) => {
+          return resolve(results.jsonBody.businesses);
+        })
+        .catch((err) => {
+          return reject(err);
+        });
+      }
+
     });
   });
 }
