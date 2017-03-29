@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const controller = require('./controller.js');
 
-router.get('/:lat/:lng?', controller.index);
+router.get('/yelp/:lat/:lng?', controller.yelp);
+router.get('/weather/:lat/:lng', controller.weather);
 
 module.exports = router;
