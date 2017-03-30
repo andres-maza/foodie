@@ -47,6 +47,7 @@ button {
   z-index: -1;
   top: 0;
   left: 0;
+  overflow: hidden;
 }
 
 @keyframes spinning-emoji-anim {
@@ -80,4 +81,17 @@ button {
 .emoji_four {
   top: 67%;
   left: 80%;
+}
+
+@keyframes load-anim {
+  from{transform: rotate(0deg);}
+  to{transform: rotate(360deg);}
+}
+
+.load-icon {
+  width: 120px;
+  height: 120px;
+  background-color: transparent;
+  border: #000 2px solid;
+  animation: load-anim 1s ease-in-out infinite;
 }

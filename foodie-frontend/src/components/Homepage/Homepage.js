@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import update from 'react-addons-update';
 
+import LoadingAnim from '../LoadingAnim';
+
 class Homepage extends Component {
   constructor(props) {
     super(props);
@@ -21,102 +23,74 @@ class Homepage extends Component {
         rain: [
           {
             term: 'Soup Dumplings',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           },
           {
             term: 'Comfort Food',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           },
           {
             term: 'Ramen',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           },
           {
             term: 'Pizza',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           },
           {
             term: 'Mexican',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           }
         ],
         snow: [
           {
             term: 'Soup Dumplings',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           },
           {
             term: 'Ramen',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           },
           {
             term: 'Pizza',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           },
           {
             term: 'Italian',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           },
           {
             term: 'Comfort Food',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: ''
           }
         ],
         clear: [
           {
             term: 'Burgers',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: 'white'
           },
           {
             term: 'Hot Dogs',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: 'green'
           },
           {
             term: 'BBQ',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: 'blue'
           },
           {
             term: 'Sushi',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: 'red'
           },
           {
             term: 'Tacos',
-            emoji_a: '',
-            emoji_b: '',
-            emoji_c: ''
+            emoji_a: 'yellow'
           }
         ]
       },
       heading: '',
-      indexNum: 0
+      emoji_bg_img: {
+        backgroundColor: 'blue'
+      }
     }
   }
 
@@ -155,11 +129,14 @@ class Homepage extends Component {
             });
           } else if ((weatherId >= 800 && weatherId < 900) || (weatherId >= 950 && weatherId <= 955) && currentTemp > 40) {
             // Checks for 'Clear' or 'Clouds'
-            let selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)].term;
+            let selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)];
             this.setState({
               delivery: 0,
-              term: `${selectedTerm}`,
-              heading:`Hey look, it's nice out! How \'bout ${selectedTerm.toLowerCase()}?`
+              term: `${selectedTerm.term}`,
+              emoji_bg_img: {
+                backgroundColor: `${selectedTerm.emoji_a}`
+              },
+              heading:`Hey look, it's nice out! How \'bout ${selectedTerm.term.toLowerCase()}?`
             });
           }
           // Continue else if statements for weather here...
@@ -189,10 +166,13 @@ class Homepage extends Component {
         heading: `Hey look, like it might snow today. How \'bout ${selectedTerm.toLowerCase()} for delivery?`
       });
     } else if ((weatherId >= 800 && weatherId < 900) || (weatherId >= 950 && weatherId <= 955) && currentTemp > 40) {
-      let selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)].term;
+      let selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)];
       this.setState({
-        term: `${selectedTerm}`,
-        heading:`Hey look, it's nice out! How \'bout ${selectedTerm.toLowerCase()}?`
+        term: `${selectedTerm.term}`,
+        emoji_bg_img: {
+          backgroundColor: `${selectedTerm.emoji_a}`
+        },
+        heading:`Hey look, it's nice out! How \'bout ${selectedTerm.term.toLowerCase()}?`
       });
     }
   }
@@ -200,6 +180,9 @@ class Homepage extends Component {
   render() {
     return(
       <div className="container">
+        <LoadingAnim
+          display="visibile"
+        />
         <div className="hp-content">
           <h1>{this.state.heading}</h1>
           <Link to={`/results/${this.state.position.latitude}/${this.state.position.longitude}?term=${this.state.term}&delivery=${this.state.delivery}`}>
@@ -208,10 +191,10 @@ class Homepage extends Component {
           <button className="standard-btn" onClick={this.getNewOption.bind(this)}>Give me another option</button>
         </div>
         <div className="spinning-emoji-container">
-          <div className="emoji_one"></div>
-          <div className="emoji_two"></div>
-          <div className="emoji_three"></div>
-          <div className="emoji_four"></div>
+          <div className="emoji_one" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_two" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_three" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_four" style={this.state.emoji_bg_img}></div>
         </div>
       </div>
     );
