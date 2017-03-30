@@ -10,7 +10,7 @@ YelpService.findOptions = (lat, lng, term, delivery) => {
     .then((response) => {
       const client = yelp.client(response.jsonBody.access_token);
 
-      // If delivery exists, run transactionSearch, else just search.
+      // If delivery is truthy, run transactionSearch, else just search.
       if (delivery) {
         client.transactionSearch('delivery', {
           term: `${term}`,

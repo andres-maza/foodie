@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { Route, Router, browserHistory } from 'react-router';
 
+import './styles/normalize.css';
+import './styles/style.css';
+
 import Homepage from './components/Homepage/Homepage.js';
 import SearchResults from './components/SearchResults/SearchResults.js';
 
