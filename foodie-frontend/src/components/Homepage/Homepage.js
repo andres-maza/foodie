@@ -98,6 +98,65 @@ class Homepage extends Component {
     }
   }
 
+  getNewOption() {
+    // Set weather id and current temperature for sporadic use.
+    let weatherId = this.state.weather.weather[0].id;
+    let currentTemp = this.state.weather.main.temp;
+    // Select items inside object of food_options
+    let foodOpts = this.state.food_options;
+
+    if ((weatherId >= 300 && weatherId < 600) || (weatherId >= 700 && weatherId < 800)) {
+      // Weather condition for 'Rain'
+      // Select term at random from array of 'rain'
+      let selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)];
+      // While selectedTerm matches current term on state, continue to randomize. (This pervents getting the same number consecutively)
+      while (selectedTerm.term === this.state.term) {
+        selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)];
+      }
+      // Re-set the state to match results
+      this.setState({
+        delivery: 1,
+        term: `${selectedTerm.term}`,
+        emoji_bg_img: {
+          backgroundColor: `${selectedTerm.emoji_a}`
+        },
+        heading: `Hey, looks like it might rain today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
+      });
+    } else if (weatherId >= 600 && weatherId < 700) {
+      // Weather condition for 'Snow'
+      let selectedTerm = foodOpts.snow[Math.floor(Math.random() * foodOpts.snow.length)];
+
+      while (selectedTerm.term === this.state.term) {
+        selectedTerm = foodOpts.snow[Math.floor(Math.random() * foodOpts.snow.length)];
+      }
+
+      this.setState({
+        delivery: 1,
+        term: `${selectedTerm.term}`,
+        emoji_bg_img: {
+          backgroundColor: `${selectedTerm.emoji_a}`
+        },
+        heading: `Hey, looks like it might snow today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
+      });
+    } else if ((weatherId >= 800 && weatherId < 900) || (weatherId >= 950 && weatherId <= 955) && currentTemp > 40) {
+      // Weather condition for 'Clear' and 'Clouds'
+      let selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)];
+
+      while (selectedTerm.term === this.state.term) {
+        selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)];
+      }
+
+      this.setState({
+        delivery: 0,
+        term: `${selectedTerm.term}`,
+        emoji_bg_img: {
+          backgroundColor: `${selectedTerm.emoji_a}`
+        },
+        heading:`Hey look, it's nice out! How \'bout ${selectedTerm.term.toLowerCase()}?`
+      });
+    }
+  }
+
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({position: position.coords});
@@ -115,88 +174,14 @@ class Homepage extends Component {
               display: 'block'
             }
           });
-          // Store the id of 'weather' in a variable to be used sporadically
-          let weatherId = data.weather[0].id;
-          let currentTemp = data.main.temp;
-          // Get array of messages for later use
-          let foodOpts = this.state.food_options;
-          // If else statements for each weather condition
-          if ((weatherId >= 300 && weatherId < 600) || (weatherId >= 700 && weatherId < 800)) {
-            // Checks for 'Rain' or 'Atmosphere'
-            let selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)];
-            this.setState({
-              delivery: 1,
-              term: `${selectedTerm.term}`,
-              emoji_bg_img: {
-                backgroundColor: `${selectedTerm.emoji_a}`
-              },
-              heading: `Hey, looks like it might rain today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
-            });
-          } else if (weatherId >= 600 && weatherId < 700) {
-            // Checks for 'Snow'
-            let selectedTerm = foodOpts.snow[Math.floor(Math.random() * foodOpts.snow.length)];
-            this.setState({
-              delivery: 1,
-              term: `${selectedTerm.term}`,
-              emoji_bg_img: {
-                backgroundColor: `${selectedTerm.emoji_a}`
-              },
-              heading: `Hey, looks like it might snow today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
-            });
-          } else if ((weatherId >= 800 && weatherId < 900) || (weatherId >= 950 && weatherId <= 955) && currentTemp > 40) {
-            // Checks for 'Clear' or 'Clouds'
-            let selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)];
-            this.setState({
-              delivery: 0,
-              term: `${selectedTerm.term}`,
-              emoji_bg_img: {
-                backgroundColor: `${selectedTerm.emoji_a}`
-              },
-              heading:`Hey look, it's nice out! How \'bout ${selectedTerm.term.toLowerCase()}?`
-            });
-          }
-          // Continue else if statements for weather here...
+          // Source function with core functionality, see above.
+          this.getNewOption();
         });
       })
       .catch((err) => {
         console.log('ERROR: ', err);
       })
     })
-  }
-
-  getNewOption() {
-    let weatherId = this.state.weather.weather[0].id;
-    let currentTemp = this.state.weather.main.temp;
-    let foodOpts = this.state.food_options;
-
-    if ((weatherId >= 300 && weatherId < 600) || (weatherId >= 700 && weatherId < 800)) {
-      let selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)];
-      this.setState({
-        term: `${selectedTerm.term}`,
-        emoji_bg_img: {
-          backgroundColor: `${selectedTerm.emoji_a}`
-        },
-        heading: `Hey, looks like it might rain today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
-      });
-    } else if (weatherId >= 600 && weatherId < 700) {
-      let selectedTerm = foodOpts.snow[Math.floor(Math.random() * foodOpts.snow.length)];
-      this.setState({
-        term: `${selectedTerm.term}`,
-        emoji_bg_img: {
-          backgroundColor: `${selectedTerm.emoji_a}`
-        },
-        heading: `Hey, looks like it might snow today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
-      });
-    } else if ((weatherId >= 800 && weatherId < 900) || (weatherId >= 950 && weatherId <= 955) && currentTemp > 40) {
-      let selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)];
-      this.setState({
-        term: `${selectedTerm.term}`,
-        emoji_bg_img: {
-          backgroundColor: `${selectedTerm.emoji_a}`
-        },
-        heading:`Hey look, it's nice out! How \'bout ${selectedTerm.term.toLowerCase()}?`
-      });
-    }
   }
 
   render() {
