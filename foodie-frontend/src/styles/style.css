@@ -1,5 +1,7 @@
 body {
   background-color: #FFEBEA;
+  -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 button {
@@ -14,16 +16,21 @@ button {
   align-items: center;
 }
 
+/*@keyframes fade-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}*/
+
 .hp-content {
   text-align: center;
-  max-width: 1024px;
-  margin: -5% auto 0 auto;
+  max-width: 1010px;
+  margin: -3% auto 0 auto;
 }
 
 .hp-content h1 {
   font-family: 'Merriweather', serif;
   font-weight: 900;
-  font-size: 85px;
+  font-size: 75px;
   letter-spacing: -1px;
 }
 
@@ -32,8 +39,8 @@ button {
   border: #000 2px solid;
   padding: 22px 25px;
   font-family: 'Montserrat', serif;
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: 700;
+  font-size: 12px;
   letter-spacing: 0.75px;
   text-transform: uppercase;
   margin-right: 25px;
@@ -84,14 +91,22 @@ button {
 }
 
 @keyframes load-anim {
-  from{transform: rotate(0deg);}
-  to{transform: rotate(360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .load-icon {
-  width: 120px;
-  height: 120px;
+  position: absolute;
+  top: 45.5%;
+  left: 47%;
+  width: 80px;
+  /*height: 80px;*/
   background-color: transparent;
+  border-radius: 50px;
   border: #000 2px solid;
   animation: load-anim 1s ease-in-out infinite;
 }

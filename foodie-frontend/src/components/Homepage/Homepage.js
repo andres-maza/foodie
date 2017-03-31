@@ -23,45 +23,45 @@ class Homepage extends Component {
         rain: [
           {
             term: 'Soup Dumplings',
-            emoji_a: ''
+            emoji_a: 'white'
           },
           {
             term: 'Comfort Food',
-            emoji_a: ''
+            emoji_a: 'blue'
           },
           {
             term: 'Ramen',
-            emoji_a: ''
+            emoji_a: 'green'
           },
           {
             term: 'Pizza',
-            emoji_a: ''
+            emoji_a: 'yellow'
           },
           {
             term: 'Mexican',
-            emoji_a: ''
+            emoji_a: 'red'
           }
         ],
         snow: [
           {
             term: 'Soup Dumplings',
-            emoji_a: ''
+            emoji_a: 'blue'
           },
           {
             term: 'Ramen',
-            emoji_a: ''
+            emoji_a: 'green'
           },
           {
             term: 'Pizza',
-            emoji_a: ''
+            emoji_a: 'yellow'
           },
           {
             term: 'Italian',
-            emoji_a: ''
+            emoji_a: 'red'
           },
           {
             term: 'Comfort Food',
-            emoji_a: ''
+            emoji_a: 'white'
           }
         ],
         clear: [
@@ -90,6 +90,10 @@ class Homepage extends Component {
       heading: '',
       emoji_bg_img: {
         backgroundColor: 'blue'
+      },
+      loadIcon: true,
+      isLoaded: {
+        display: 'none'
       }
     }
   }
@@ -104,7 +108,13 @@ class Homepage extends Component {
       .then((results) => {
         results.json().then((data) => {
           // Set the state of 'weather' to be the value of 'data'
-          this.setState({weather: data});
+          this.setState({
+            weather: data,
+            loadIcon: false,
+            isLoaded: {
+              display: 'block'
+            }
+          });
           // Store the id of 'weather' in a variable to be used sporadically
           let weatherId = data.weather[0].id;
           let currentTemp = data.main.temp;
@@ -113,19 +123,25 @@ class Homepage extends Component {
           // If else statements for each weather condition
           if ((weatherId >= 300 && weatherId < 600) || (weatherId >= 700 && weatherId < 800)) {
             // Checks for 'Rain' or 'Atmosphere'
-            let selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)].term;
+            let selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)];
             this.setState({
               delivery: 1,
-              term: `${selectedTerm}`,
-              heading: `Hey, looks like it might rain today. How \'bout ${selectedTerm.toLowerCase()} for delivery?`
+              term: `${selectedTerm.term}`,
+              emoji_bg_img: {
+                backgroundColor: `${selectedTerm.emoji_a}`
+              },
+              heading: `Hey, looks like it might rain today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
             });
           } else if (weatherId >= 600 && weatherId < 700) {
             // Checks for 'Snow'
-            let selectedTerm = foodOpts.snow[Math.floor(Math.random() * foodOpts.snow.length)].term;
+            let selectedTerm = foodOpts.snow[Math.floor(Math.random() * foodOpts.snow.length)];
             this.setState({
               delivery: 1,
-              term: `${selectedTerm}`,
-              heading: `Hey, looks like it might snow today. How \'bout ${selectedTerm.toLowerCase()} for delivery?`
+              term: `${selectedTerm.term}`,
+              emoji_bg_img: {
+                backgroundColor: `${selectedTerm.emoji_a}`
+              },
+              heading: `Hey, looks like it might snow today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
             });
           } else if ((weatherId >= 800 && weatherId < 900) || (weatherId >= 950 && weatherId <= 955) && currentTemp > 40) {
             // Checks for 'Clear' or 'Clouds'
@@ -154,16 +170,22 @@ class Homepage extends Component {
     let foodOpts = this.state.food_options;
 
     if ((weatherId >= 300 && weatherId < 600) || (weatherId >= 700 && weatherId < 800)) {
-      let selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)].term;
+      let selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)];
       this.setState({
-        term: `${selectedTerm}`,
-        heading: `Hey look, like it might rain today. How \'bout ${selectedTerm.toLowerCase()} for delivery?`
+        term: `${selectedTerm.term}`,
+        emoji_bg_img: {
+          backgroundColor: `${selectedTerm.emoji_a}`
+        },
+        heading: `Hey look, like it might rain today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
       });
     } else if (weatherId >= 600 && weatherId < 700) {
-      let selectedTerm = foodOpts.snow[Math.floor(Math.random() * foodOpts.snow.length)].term;
+      let selectedTerm = foodOpts.snow[Math.floor(Math.random() * foodOpts.snow.length)];
       this.setState({
-        term: `${selectedTerm}`,
-        heading: `Hey look, like it might snow today. How \'bout ${selectedTerm.toLowerCase()} for delivery?`
+        term: `${selectedTerm.term}`,
+        emoji_bg_img: {
+          backgroundColor: `${selectedTerm.emoji_a}`
+        },
+        heading: `Hey look, like it might snow today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
       });
     } else if ((weatherId >= 800 && weatherId < 900) || (weatherId >= 950 && weatherId <= 955) && currentTemp > 40) {
       let selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)];
@@ -181,16 +203,16 @@ class Homepage extends Component {
     return(
       <div className="container">
         <LoadingAnim
-          display="visibile"
+          display={this.state.loadIcon}
         />
-        <div className="hp-content">
+        <div className="hp-content" style={this.state.isLoaded}>
           <h1>{this.state.heading}</h1>
           <Link to={`/results/${this.state.position.latitude}/${this.state.position.longitude}?term=${this.state.term}&delivery=${this.state.delivery}`}>
             <button className="standard-btn">Search for {this.state.term}</button>
           </Link>
           <button className="standard-btn" onClick={this.getNewOption.bind(this)}>Give me another option</button>
         </div>
-        <div className="spinning-emoji-container">
+        <div className="spinning-emoji-container" style={this.state.isLoaded}>
           <div className="emoji_one" style={this.state.emoji_bg_img}></div>
           <div className="emoji_two" style={this.state.emoji_bg_img}></div>
           <div className="emoji_three" style={this.state.emoji_bg_img}></div>
