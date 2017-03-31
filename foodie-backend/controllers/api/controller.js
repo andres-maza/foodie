@@ -11,9 +11,13 @@ controller.yelp = (req, res) => {
     res.json(data);
   })
   .catch((err) => {
+    console.log('ERROR ERROR ERROR!')
     res
     .status(400)
-    .json(err);
+    .json({
+      message: 'Woops! Looks like something went wrong!',
+      error: err
+    });
   });
 }
 

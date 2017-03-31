@@ -186,7 +186,7 @@ class Homepage extends Component {
 
   render() {
     return(
-      <div className="container">
+      <div className="hp-container">
         <LoadingAnim
           display={this.state.loadIcon}
         />

@@ -8,7 +8,16 @@ button {
   cursor: pointer;
 }
 
-.container {
+h1 {
+  font-family: 'Merriweather', serif;
+  font-size: 55px;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hp-container {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -24,15 +33,64 @@ button {
 
 .hp-content {
   text-align: center;
-  max-width: 1010px;
+  max-width: 1080px;
   margin: -3% auto 0 auto;
 }
 
 .hp-content h1 {
   font-family: 'Merriweather', serif;
   font-weight: 900;
-  font-size: 75px;
+  font-size: 80px;
   letter-spacing: -1px;
+}
+
+.container {
+  max-width: 1360px;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container h1 {
+  max-width: 1010px;
+  margin: 85px auto 65px auto;
+  line-height: 62px;
+  letter-spacing: -1px;
+}
+
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  justify-content: center;
+}
+
+.search-result {
+  flex: 1;
+  min-width: 305px;
+  border: rgba(0,0,0,0.10) 2px solid;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  padding: 25px 25px 33px 25px;
+}
+
+.search-result h2 {
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+  font-size: 21px;
+  line-height: 32px;
+  max-width: 325px;
+}
+
+.search-result ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.search-result ul li {
+  margin-bottom: 5px;
 }
 
 .standard-btn {
@@ -46,6 +104,18 @@ button {
   text-transform: uppercase;
   margin-right: 25px;
 
+}
+
+.secondary-btn {
+  background-color: transparent;
+  border: #000 2px solid;
+  padding: 16px 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.75px;
+  margin-top: 20px;
 }
 
 .spinning-emoji-container {
@@ -98,6 +168,18 @@ button {
   to {
     transform: rotate(360deg);
   }
+}
+
+.load-icon-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .load-icon {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Result = (props) => {
   return(
@@ -11,6 +12,9 @@ const Result = (props) => {
         <li>Rating: {props.rating}</li>
         <li>Delivery: {props.delivery}</li>
       </ul>
+      <Link to={`${props.url}`} target="_blank">
+        <button className="secondary-btn">View on Yelp</button>
+      </Link>
     </div>
   )
 };
