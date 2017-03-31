@@ -176,7 +176,7 @@ class Homepage extends Component {
         emoji_bg_img: {
           backgroundColor: `${selectedTerm.emoji_a}`
         },
-        heading: `Hey look, like it might rain today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
+        heading: `Hey, looks like it might rain today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
       });
     } else if (weatherId >= 600 && weatherId < 700) {
       let selectedTerm = foodOpts.snow[Math.floor(Math.random() * foodOpts.snow.length)];
@@ -185,7 +185,7 @@ class Homepage extends Component {
         emoji_bg_img: {
           backgroundColor: `${selectedTerm.emoji_a}`
         },
-        heading: `Hey look, like it might snow today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
+        heading: `Hey, looks like it might snow today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
       });
     } else if ((weatherId >= 800 && weatherId < 900) || (weatherId >= 950 && weatherId <= 955) && currentTemp > 40) {
       let selectedTerm = foodOpts.clear[Math.floor(Math.random() * foodOpts.clear.length)];
