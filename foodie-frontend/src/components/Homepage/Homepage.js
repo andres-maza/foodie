@@ -22,74 +22,74 @@ class Homepage extends Component {
       food_options: {
         rain: [
           {
-            term: 'Soup Dumplings',
-            emoji_a: 'white'
+            term: 'Sushi',
+            emoji_a: '../assets/sushi.png'
           },
           {
             term: 'Comfort Food',
-            emoji_a: 'blue'
+            emoji_a: '../assets/comfort-food.png'
           },
           {
             term: 'Ramen',
-            emoji_a: 'green'
+            emoji_a: '../assets/ramen.png'
           },
           {
             term: 'Pizza',
-            emoji_a: 'yellow'
+            emoji_a: '../assets/pizza.png'
           },
           {
-            term: 'Mexican',
-            emoji_a: 'red'
+            term: 'Mexican Food',
+            emoji_a: '../assets/mexican-food.png'
           }
         ],
         snow: [
           {
             term: 'Soup Dumplings',
-            emoji_a: 'blue'
+            emoji_a: '../assets/soup-dumplings.png'
           },
           {
             term: 'Ramen',
-            emoji_a: 'green'
+            emoji_a: '../assets/ramen.png'
           },
           {
             term: 'Pizza',
-            emoji_a: 'yellow'
+            emoji_a: '../assets/pizza.png'
           },
           {
-            term: 'Italian',
-            emoji_a: 'red'
+            term: 'Italian Food',
+            emoji_a: '../assets/italian-food.png'
           },
           {
             term: 'Comfort Food',
-            emoji_a: 'white'
+            emoji_a: '../assets/comfort-food.png'
           }
         ],
         clear: [
           {
             term: 'Burgers',
-            emoji_a: 'white'
+            emoji_a: '../assets/burger.png'
           },
           {
             term: 'Hot Dogs',
-            emoji_a: 'green'
+            emoji_a: '../assets/hot-dog.png'
           },
           {
             term: 'BBQ',
-            emoji_a: 'blue'
+            emoji_a: '../assets/bbq.png'
           },
           {
             term: 'Sushi',
-            emoji_a: 'red'
+            emoji_a: '../assets/sushi.png'
           },
           {
             term: 'Tacos',
-            emoji_a: 'yellow'
+            emoji_a: '../assets/taco.png'
           }
         ]
       },
       heading: '',
       emoji_bg_img: {
-        backgroundColor: 'blue'
+        backgroundImage: ''
       },
       loadIcon: true,
       isLoaded: {
@@ -101,7 +101,7 @@ class Homepage extends Component {
   getNewOption() {
     // Set weather id and current temperature for sporadic use.
     let weatherId = this.state.weather.weather[0].id;
-    let currentTemp = this.state.weather.main.temp;
+    let currentTemp = ((this.state.weather.main.temp * 9) / 5) - 459.67;
     // Select items inside object of food_options
     let foodOpts = this.state.food_options;
 
@@ -118,7 +118,7 @@ class Homepage extends Component {
         delivery: 1,
         term: `${selectedTerm.term}`,
         emoji_bg_img: {
-          backgroundColor: `${selectedTerm.emoji_a}`
+          backgroundImage: 'url(' + selectedTerm.emoji_a + ')'
         },
         heading: `Hey, looks like it might rain today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
       });
@@ -134,7 +134,7 @@ class Homepage extends Component {
         delivery: 1,
         term: `${selectedTerm.term}`,
         emoji_bg_img: {
-          backgroundColor: `${selectedTerm.emoji_a}`
+          backgroundImage: 'url(' + selectedTerm.emoji_a + ')'
         },
         heading: `Hey, looks like it might snow today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
       });
@@ -150,7 +150,7 @@ class Homepage extends Component {
         delivery: 0,
         term: `${selectedTerm.term}`,
         emoji_bg_img: {
-          backgroundColor: `${selectedTerm.emoji_a}`
+          backgroundImage: 'url(' + selectedTerm.emoji_a + ')'
         },
         heading:`Hey look, it's nice out! How \'bout ${selectedTerm.term.toLowerCase()}?`
       });
@@ -198,10 +198,13 @@ class Homepage extends Component {
           <button className="standard-btn" onClick={this.getNewOption.bind(this)}>Give me another option</button>
         </div>
         <div className="spinning-emoji-container" style={this.state.isLoaded}>
-          <div className="emoji_one" style={this.state.emoji_bg_img}></div>
-          <div className="emoji_two" style={this.state.emoji_bg_img}></div>
-          <div className="emoji_three" style={this.state.emoji_bg_img}></div>
-          <div className="emoji_four" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_box emoji_one" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_box emoji_two" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_box emoji_three" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_box emoji_four" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_box emoji_five" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_box emoji_six" style={this.state.emoji_bg_img}></div>
+          <div className="emoji_box emoji_seven" style={this.state.emoji_bg_img}></div>
         </div>
       </div>
     );

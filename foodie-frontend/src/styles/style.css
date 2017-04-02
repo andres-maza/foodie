@@ -1,3 +1,7 @@
+* {
+  outline: none;
+}
+
 body {
   background-color: #FFEBEA;
   -webkit-font-smoothing: antialiased;
@@ -13,8 +17,25 @@ h1 {
   font-size: 55px;
 }
 
-h2 {
+h2, h3 {
   font-family: 'Montserrat', sans-serif;
+}
+
+h4 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: -0.25px;
+  color: rgba(0,0,0,.50);
+}
+
+h4 a {
+  color: rgba(0,0,0,1);
+}
+
+p, li {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
 }
 
 .hp-container {
@@ -103,7 +124,7 @@ h2 {
   letter-spacing: 0.75px;
   text-transform: uppercase;
   margin-right: 25px;
-
+  transition: .25s ease-in-out;
 }
 
 .secondary-btn {
@@ -116,6 +137,11 @@ h2 {
   font-size: 12px;
   letter-spacing: 0.75px;
   margin-top: 20px;
+  transition: .25s ease-in-out;
+}
+
+.standard-btn:hover, .secondary-btn:hover {
+  background-color: white;
 }
 
 .spinning-emoji-container {
@@ -133,33 +159,54 @@ h2 {
   to {transform: rotate(360deg);}
 }
 
-.emoji_one, .emoji_two, .emoji_three, .emoji_four {
-  background-color: black;
-  width: 150px;
-  height: 150px;
+.emoji_box {
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 120px;
+  height: 120px;
   position: absolute;
   animation: spinning-emoji-anim 5s linear infinite;
 }
 
 .emoji_one {
-  top: 5%;
+  top: 54%;
   left: 0%;
+  background-position: bottom right;
 }
 
 .emoji_two {
-  top: 85%;
-  left: 20%;
+  top: 1%;
+  left: 9%;
 }
 
 .emoji_three {
-  top: -5%;
-  left: 60%;
+  top: 82%;
+  left: 27%;
 }
 
 .emoji_four {
-  top: 67%;
-  left: 80%;
+  top: 7%;
+  left: 46%;
+  background-position: bottom right;
 }
+
+.emoji_five {
+  top: -6%;
+  left: 76%;
+}
+
+.emoji_six {
+  top: 79%;
+  left: 76%;
+  background-position: bottom right;
+}
+
+.emoji_seven {
+  top: 36%;
+  left: 95%;
+}
+
+
 
 @keyframes load-anim {
   from {

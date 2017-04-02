@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Result from './Result.js';
+import { Link } from 'react-router';
 
 import LoadingAnim from '../LoadingAnim';
 
@@ -10,7 +11,7 @@ class SearchResults extends Component {
     this.state = {
       results: [],
       page_title: '',
-      loadIcon: true
+      loadIcon: true,
     }
   }
 
@@ -47,6 +48,9 @@ class SearchResults extends Component {
   render() {
     return(
       <div className="container">
+          <LoadingAnim
+            display={this.state.loadIcon}
+          />
         <h1>{this.state.page_title}</h1>
         <div className="results-container">
         {this.state.results.map((result) => {
@@ -70,11 +74,7 @@ class SearchResults extends Component {
           )
         })}
         </div>
-        <div className="load-icon-container">
-          <LoadingAnim
-            display={this.state.loadIcon}
-          />
-        </div>
+        {!this.state.loadIcon ? <h4>Can't find what you're looking for? <Link to="/">Search for something else</Link></h4> : ''}
       </div>
     );
   }

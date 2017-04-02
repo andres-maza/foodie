@@ -12,9 +12,9 @@ const Result = (props) => {
         <li>Rating: {props.rating}</li>
         <li>Delivery: {props.delivery}</li>
       </ul>
-      <Link to={`${props.url}`} target="_blank">
+      <a href={`${props.url}`} target="_blank">
         <button className="secondary-btn">View on Yelp</button>
-      </Link>
+      </a>
     </div>
   )
 };
