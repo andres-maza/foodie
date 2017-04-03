@@ -87,14 +87,15 @@ p, li {
 
 .results-container {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   text-align: left;
-  justify-content: center;
+  /*justify-content: center;*/
 }
 
 .search-result {
   flex: 1;
-  min-width: 305px;
+  -webkit-flex: 1 1 305px;
   border: rgba(0,0,0,0.10) 2px solid;
   margin: 0 7px 14px 7px;
   padding: 25px 25px 33px 25px;
@@ -369,7 +370,6 @@ a {
 
   .search-result {
     min-width: 0;
-    max-width: 280px;
     padding: 0px 15px 25px 15px;
   }
 

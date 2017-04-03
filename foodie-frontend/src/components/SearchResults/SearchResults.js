@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Result from './Result.js';
 import { Link } from 'react-router';
+import axios from 'axios';
 
 import LoadingAnim from '../LoadingAnim';
 
@@ -16,32 +17,53 @@ class SearchResults extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8000/api/yelp/q?lat=${this.props.location.query.lat}&lng=${this.props.location.query.lng}&term=${this.props.location.query.term}&delivery=${this.props.location.query.delivery}`, {
-      method: 'GET'
-    })
-    .then((results) => {
-      results.json().then((data) => {
-        if (!data.length || data.length === 0){
-          // If data is undefined or data is an empty array, display error page_title.
-          console.log(data);
-          this.setState({
-            page_title: `Looks like there is no "${this.props.location.query.term.toLowerCase()}" near you at this moment.`,
-            loadIcon: false
-          })
-        } else {
+    // fetch(`http://localhost:8000/api/yelp/q?lat=${this.props.location.query.lat}&lng=${this.props.location.query.lng}&term=${this.props.location.query.term}&delivery=${this.props.location.query.delivery}`, {
+    //   method: 'GET'
+    // })
+    // .then((results) => {
+    //   results.json().then((data) => {
+    //     if (!data.length || data.length === 0){
+    //       // If data is undefined or data is an empty array, display error page_title.
+    //       console.log(data);
+    //       this.setState({
+    //         page_title: `Looks like there is no "${this.props.location.query.term.toLowerCase()}" near you at this moment.`,
+    //         loadIcon: false
+    //       })
+    //     } else {
+    //       // If data is an array with a length greater than 0, set state to match result.
+    //       this.setState({
+    //         results: data,
+    //         page_title: `Here's a list of places for "${this.props.location.query.term.toLowerCase()}" ${parseInt(this.props.location.query.delivery) ? 'with delivery available' : ''}`,
+    //         loadIcon: false
+    //       });
+    //     }
+    //   })
+    // })
+    // .catch((err) => {
+    //   res
+    //   .status(400)
+    //   .json(err)
+    // });
+    axios.get(`http://localhost:8000/api/yelp/q?lat=${this.props.location.query.lat}&lng=${this.props.location.query.lng}&term=${this.props.location.query.term}&delivery=${this.props.location.query.delivery}`)
+    .then((response) => {
+      if(!response.data.length || response.data.length === 0){
+        // If data is undefined or data is an empty array, display error page_title.
+        console.log(response.data);
+        this.setState({
+          page_title: `Looks like there is no "${this.props.location.query.term.toLowerCase()}" near you at this moment.`,
+          loadIcon: false
+        });
+      } else {
+        this.setState({
           // If data is an array with a length greater than 0, set state to match result.
-          this.setState({
-            results: data,
-            page_title: `Here's a list of places for "${this.props.location.query.term.toLowerCase()}" ${parseInt(this.props.location.query.delivery) ? 'with delivery available' : ''}`,
-            loadIcon: false
-          });
-        }
-      })
+          results: response.data,
+          page_title: `Here's a list of places for "${this.props.location.query.term.toLowerCase()}" ${parseInt(this.props.location.query.delivery) ? 'with delivery available' : ''}`,
+          loadIcon: false
+        });
+      }
     })
     .catch((err) => {
-      res
-      .status(400)
-      .json(err)
+      console.log('ERROR: ', err)
     });
   }
 

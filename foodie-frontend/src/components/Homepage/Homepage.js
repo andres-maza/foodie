@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import update from 'react-addons-update';
+import axios from 'axios';
+
 
 import LoadingAnim from '../LoadingAnim';
 
@@ -161,26 +163,42 @@ class Homepage extends Component {
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({position: position.coords});
 
-      fetch(`http://localhost:8000/api/weather/${this.state.position.latitude}/${this.state.position.longitude}`, {
-        method: 'GET'
-      })
-      .then((results) => {
-        results.json().then((data) => {
-          // Set the state of 'weather' to be the value of 'data'
-          this.setState({
-            weather: data,
-            loadIcon: false,
-            isLoaded: {
-              display: 'block'
-            }
-          });
-          // Source function with core functionality, see above.
-          this.getNewOption();
+      // fetch(`http://localhost:8000/api/weather/${this.state.position.latitude}/${this.state.position.longitude}`, {
+      //   method: 'GET'
+      // })
+      // .then((results) => {
+      //   results.json().then((data) => {
+          // // Set the state of 'weather' to be the value of 'data'
+          // this.setState({
+          //   weather: data,
+          //   loadIcon: false,
+          //   isLoaded: {
+          //     display: 'block'
+          //   }
+          // });
+          // // Source function with core functionality, see above.
+          // this.getNewOption();
+      //   });
+      // })
+      // .catch((err) => {
+      //   console.log('ERROR: ', err);
+      // })
+      axios.get(`http://localhost:8000/api/weather/${this.state.position.latitude}/${this.state.position.longitude}`)
+      .then((response) => {
+        // Set the state of 'weather' to be the value of 'data'
+        this.setState({
+          weather: response.data,
+          loadIcon: false,
+          isLoaded: {
+            display: 'block'
+          }
         });
+        // Source function with core functionality, see above.
+        this.getNewOption();
       })
       .catch((err) => {
         console.log('ERROR: ', err);
-      })
+      });
     })
   }
 
