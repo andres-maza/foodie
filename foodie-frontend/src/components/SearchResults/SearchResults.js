@@ -16,7 +16,7 @@ class SearchResults extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8000/api/yelp/${this.props.params.lat}/${this.props.params.lng}?term=${this.props.location.query.term}&delivery=${this.props.location.query.delivery}`, {
+    fetch(`http://localhost:8000/api/yelp/q?lat=${this.props.location.query.lat}&lng=${this.props.location.query.lng}&term=${this.props.location.query.term}&delivery=${this.props.location.query.delivery}`, {
       method: 'GET'
     })
     .then((results) => {

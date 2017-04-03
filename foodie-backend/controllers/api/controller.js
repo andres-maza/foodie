@@ -6,7 +6,7 @@ let controller = {};
 // Runs Yelp API search
 controller.yelp = (req, res) => {
   YelpService
-  .findOptions(req.params.lat, req.params.lng, req.query.term, parseInt(req.query.delivery, 10))
+  .findOptions(req.query.lat, req.query.lng, req.query.term, parseInt(req.query.delivery, 10))
   .then((data) => {
     res.json(data);
   })

@@ -11,7 +11,7 @@ import SearchResults from './components/SearchResults/SearchResults.js';
 ReactDom.render(
   <Router history={browserHistory}>
     <Route path="/" component={Homepage} />
-    <Route path="/results/:lat/:lng" component={SearchResults} />
+    <Route path="/results/q" component={SearchResults} />
   </Router>
   , document.getElementById('app')
 );

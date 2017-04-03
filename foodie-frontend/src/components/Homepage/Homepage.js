@@ -192,7 +192,7 @@ class Homepage extends Component {
         />
         <div className="hp-content" style={this.state.isLoaded}>
           <h1>{this.state.heading}</h1>
-          <Link to={`/results/${this.state.position.latitude}/${this.state.position.longitude}?term=${this.state.term}&delivery=${this.state.delivery}`}>
+          <Link to={`/results/q?lat=${this.state.position.latitude}&lng=${this.state.position.longitude}&term=${this.state.term}&delivery=${this.state.delivery}`}>
             <button className="standard-btn">Search for {this.state.term}</button>
           </Link>
           <button className="standard-btn" onClick={this.getNewOption.bind(this)}>Give me another option</button>

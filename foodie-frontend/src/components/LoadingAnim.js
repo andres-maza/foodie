@@ -12,7 +12,9 @@ const LoadingAnim = (props) => {
 
   return(
     <div className="load-icon-container" style={loadIconDisplay}>
-      <div className="load-icon"></div>
+      <div className="load-icon">
+        <div className="line"></div>
+      </div>
     </div>
   )
 };

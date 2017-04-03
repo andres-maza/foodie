@@ -14,7 +14,7 @@ button {
 
 h1 {
   font-family: 'Merriweather', serif;
-  font-size: 55px;
+  font-size: 52px;
 }
 
 h2, h3 {
@@ -24,19 +24,28 @@ h2, h3 {
 h4 {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
-  font-size: 19px;
+  font-size: 18px;
+  line-height: 24px;
   letter-spacing: -0.25px;
   color: rgba(0,0,0,.50);
 }
 
 h4 a {
   color: rgba(0,0,0,1);
+  transition: .25s;
+  text-decoration: underline;
+}
+
+h4 a:hover {
+  color: rgba(0,0,0,.65);
 }
 
 p, li {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 16px;
 }
+
+/* Homepage */
 
 .hp-container {
   position: absolute;
@@ -46,11 +55,6 @@ p, li {
   align-items: center;
   justify-content: center;
 }
-
-/*@keyframes fade-in {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}*/
 
 .hp-content {
   text-align: center;
@@ -64,6 +68,8 @@ p, li {
   font-size: 80px;
   letter-spacing: -1px;
 }
+
+/* Search Results Landing */
 
 .container {
   max-width: 1360px;
@@ -90,13 +96,12 @@ p, li {
   flex: 1;
   min-width: 305px;
   border: rgba(0,0,0,0.10) 2px solid;
-  margin-right: 15px;
-  margin-bottom: 15px;
+  margin: 0 7px 14px 7px;
   padding: 25px 25px 33px 25px;
 }
 
 .search-result h2 {
-  margin: 0 0 10px 0;
+  margin-bottom: 10px;
   font-weight: 600;
   letter-spacing: 0.25px;
   font-size: 21px;
@@ -114,6 +119,8 @@ p, li {
   margin-bottom: 5px;
 }
 
+/* Buttons */
+
 .standard-btn {
   background-color: transparent;
   border: #000 2px solid;
@@ -122,9 +129,13 @@ p, li {
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.75px;
+  margin: 0px 10px;
   text-transform: uppercase;
-  margin-right: 25px;
   transition: .25s ease-in-out;
+}
+
+a {
+  text-decoration: none;
 }
 
 .secondary-btn {
@@ -143,6 +154,8 @@ p, li {
 .standard-btn:hover, .secondary-btn:hover {
   background-color: white;
 }
+
+/* Spinning Emojis */
 
 .spinning-emoji-container {
   position: absolute;
@@ -206,37 +219,207 @@ p, li {
   left: 95%;
 }
 
+/* Loader */
 
-
-@keyframes load-anim {
-  from {
-    transform: rotate(0deg);
+@keyframes line-anim {
+  0% {
+    left: -100%;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
   }
 }
 
 .load-icon-container {
+  flex-direction: row;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .load-icon {
-  position: absolute;
-  /*top: 45.5%;
-  left: 45%;*/
-  width: 80px;
-  /*height: 80px;*/
-  background-color: transparent;
-  border-radius: 50px;
-  border: #000 2px solid;
-  animation: load-anim 1s ease-in-out infinite;
+  width: 75px;
+  overflow: hidden;
+  background-color: rgba(0,0,0,.10);
+}
+
+.line {
+  width: 75px;
+  height: 3px;
+  position: relative;
+  top: 0px;
+  left: -100%;
+  background-color: black;
+  animation: line-anim 1.5s ease-in-out infinite;
+}
+
+/* Misc */
+
+.fa {
+  margin: 0 1px;
+}
+
+/* Media Queries */
+
+@media (max-width: 1080px) {
+  .hp-content {
+    max-width: 85%;
+  }
+
+  .hp-content h1 {
+    font-size: 68px;
+  }
+
+  .standard-btn {
+    padding: 18px 22px;
+    font-size: 11px;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+  }
+
+  .secondary-btn {
+    padding: 13px 20px;
+    font-size: 11px;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 38px;
+  }
+
+  .container h1 {
+    margin: 50px auto 35px auto;
+  }
+
+  .search-result {
+    min-width: 275px;
+  }
+
+  .emoji_one {
+    top: 46%;
+    left: -5%;
+  }
+
+  .emoji_two {
+    top: 3%;
+    left: 9%;
+  }
+
+  .emoji_three {
+    top: 83%;
+    left: 25%;
+  }
+
+  .emoji_four {
+    top: 14%;
+    left: 49%;
+  }
+
+  .emoji_five {
+    top: -4%;
+    left: 84%;
+  }
+
+  .emoji_six {
+    top: 75%;
+    left: 74%;
+  }
+
+  .emoji_seven {
+    top: 36%;
+    left: 95%;
+  }
+}
+
+@media (max-width: 600px) {
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .hp-content h1 {
+    font-size: 38px;
+    line-height: 48px;
+  }
+
+  .container h1 {
+    line-height: 42px;
+    margin: 40px auto 20px auto;
+  }
+
+  .results-container {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .search-result h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .search-result {
+    min-width: 0;
+    max-width: 280px;
+    padding: 0px 15px 25px 15px;
+  }
+
+  .standard-btn {
+    padding: 15px 0px;
+    display: block;
+    margin: 10px auto;
+    width: 90%;
+  }
+
+  .emoji_box {
+    width: 80px;
+    height: 80px;
+  }
+
+  .emoji_one {
+    top: 43%;
+    left: -15%;
+    background-position: bottom right;
+  }
+
+  .emoji_two {
+    top: -2%;
+    left: -4%;
+  }
+
+  .emoji_three {
+    top: 73%;
+    left: 15%;
+  }
+
+  .emoji_four {
+    top: 9%;
+    left: 37%;
+    background-position: bottom right;
+  }
+
+  .emoji_five {
+    top: -1%;
+    left: 82%;
+  }
+
+  .emoji_six {
+    top: 84%;
+    left: 69%;
+    background-position: bottom right;
+  }
+
+  .emoji_seven {
+    top: 41%;
+    left: 92%;
+  }
 }
