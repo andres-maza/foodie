@@ -4,21 +4,6 @@ const WeatherService = require('../../services/weather.js');
 
 let controller = {};
 
-// Runs Google Geolocation API request
-controller.coords = (req, res) => {
-  GoogleLocation
-  .getCoords()
-  .then(r => r.json())
-  .then((data) => {
-    res.json(data);
-  })
-  .catch((err) => {
-    res
-    .status(400)
-    .json(err)
-  });
-}
-
 // Runs Yelp API search
 controller.yelp = (req, res) => {
   YelpService
@@ -49,5 +34,22 @@ controller.weather = (req, res) => {
     .json(err);
   });
 }
+
+// Runs Google Geolocation API request
+// NO LONGER IN USE (This code is kept here for reference only)
+// controller.coords = (req, res) => {
+//   GoogleLocation
+//   .getCoords()
+//   .then(r => r.json())
+//   .then((data) => {
+//     res.json(data);
+//   })
+//   .catch((err) => {
+//     res
+//     .status(400)
+//     .json(err)
+//   });
+// }
+
 
 module.exports = controller;

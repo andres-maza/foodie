@@ -17,7 +17,7 @@ class SearchResults extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:8000/api/yelp/q?lat=${this.props.location.query.lat}&lng=${this.props.location.query.lng}&term=${this.props.location.query.term}&delivery=${this.props.location.query.delivery}`)
+    axios.get(`https://andres-wdi-project4.herokuapp.com/api/yelp/q?lat=${this.props.location.query.lat}&lng=${this.props.location.query.lng}&term=${this.props.location.query.term}&delivery=${this.props.location.query.delivery}`)
     .then((response) => {
       if(!response.data.length || response.data.length === 0){
         // If data is undefined or data is an empty array, display error page_title.

@@ -65,7 +65,7 @@ p, li {
 .hp-content h1 {
   font-family: 'Merriweather', serif;
   font-weight: 900;
-  font-size: 85px;
+  font-size: 80px;
   letter-spacing: -1px;
 }
 
@@ -218,6 +218,44 @@ a {
 .emoji_seven {
   top: 36%;
   left: 95%;
+}
+
+/* Emoji Per Food Term */
+
+.bbq-emoji {
+  background-image: url('../assets/bbq.png');
+}
+
+.burgers-emoji {
+  background-image: url('../assets/burger.png');
+}
+
+.comfort-food-emoji {
+  background-image: url('../assets/comfort-food.png')
+}
+
+.hot-dogs-emoji {
+  background-image: url('../assets/hot-dog.png');
+}
+
+.mexican-food-emoji {
+  background-image: url('../assets/mexican-food.png');
+}
+
+.pizza-emoji {
+  background-image: url('../assets/pizza.png');
+}
+
+.ramen-emoji {
+  background-image: url('../assets/ramen.png');
+}
+
+.sushi-emoji {
+  background-image: url('../assets/sushi.png');
+}
+
+.tacos-emoji {
+  background-image: url('../assets/taco.png');
 }
 
 /* Loader */

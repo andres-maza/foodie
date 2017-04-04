@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const controller = require('./controller.js');
 
-router.get('/location', controller.coords);
 router.get('/yelp/q?', controller.yelp);
 router.get('/weather/:lat/:lng', controller.weather);
 

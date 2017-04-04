@@ -24,74 +24,87 @@ class Homepage extends Component {
         rain: [
           {
             term: 'Sushi',
-            emoji_a: '../assets/sushi.png'
+            class: 'sushi-emoji'
+            // emoji_a: '../assets/sushi.png'
           },
           {
             term: 'Comfort Food',
-            emoji_a: '../assets/comfort-food.png'
+            class: 'comfort-food-emoji'
+            // emoji_a: '../assets/comfort-food.png'
           },
           {
             term: 'Ramen',
-            emoji_a: '../assets/ramen.png'
+            class: 'ramen-emoji'
+            // emoji_a: '../assets/ramen.png'
           },
           {
             term: 'Pizza',
-            emoji_a: '../assets/pizza.png'
+            class: 'pizza-emoji'
+            // emoji_a: '../assets/pizza.png'
           },
           {
             term: 'Mexican Food',
-            emoji_a: '../assets/mexican-food.png'
+            class: 'mexican-food-emoji'
+            // emoji_a: '../assets/mexican-food.png'
           }
         ],
         snow: [
           {
             term: 'Soup Dumplings',
-            emoji_a: '../assets/soup-dumplings.png'
+            class: 'soup-dumpling-emoji'
+            // emoji_a: '../assets/soup-dumplings.png'
           },
           {
             term: 'Ramen',
-            emoji_a: '../assets/ramen.png'
+            class: 'ramen-emoji'
+            // emoji_a: '../assets/ramen.png'
           },
           {
             term: 'Pizza',
-            emoji_a: '../assets/pizza.png'
+            class: 'pizza-emoji'
+            // emoji_a: '../assets/pizza.png'
           },
           {
             term: 'Italian Food',
-            emoji_a: '../assets/italian-food.png'
+            class: 'italian-food-emoji'
+            // emoji_a: '../assets/italian-food.png'
           },
           {
             term: 'Comfort Food',
-            emoji_a: '../assets/comfort-food.png'
+            class: 'comfort-food-emoji'
+            // emoji_a: '../assets/comfort-food.png'
           }
         ],
         clear: [
           {
             term: 'Burgers',
-            emoji_a: '../assets/burger.png'
+            class: 'burgers-emoji'
+            // emoji_a: '../assets/burger.png'
           },
           {
             term: 'Hot Dogs',
-            emoji_a: '../assets/hot-dog.png'
+            class: 'hot-dogs-emoji'
+            // emoji_a: '../assets/hot-dog.png'
           },
           {
             term: 'BBQ',
-            emoji_a: '../assets/bbq.png'
+            class: 'bbq-emoji'
+            // emoji_a: '../assets/bbq.png'
           },
           {
             term: 'Sushi',
-            emoji_a: '../assets/sushi.png'
+            class: 'sushi-emoji'
+            // emoji_a: '../assets/sushi.png'
           },
           {
             term: 'Tacos',
-            emoji_a: '../assets/taco.png'
+            class: 'tacos-emoji'
+            // emoji_a: '../assets/taco.png'
           }
         ]
       },
       heading: '',
-      emoji_bg_img: {
-        backgroundImage: ''
-      },
+      emoji_class_name: '',
       loadIcon: true,
       isLoaded: {
         display: 'none'
@@ -118,9 +131,7 @@ class Homepage extends Component {
       this.setState({
         delivery: 1,
         term: `${selectedTerm.term}`,
-        emoji_bg_img: {
-          backgroundImage: 'url(' + selectedTerm.emoji_a + ')'
-        },
+        emoji_class_name: `${selectedTerm.class}`,
         heading: `Hey, looks like it might rain today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
       });
     } else if (weatherId >= 600 && weatherId < 700) {
@@ -134,9 +145,7 @@ class Homepage extends Component {
       this.setState({
         delivery: 1,
         term: `${selectedTerm.term}`,
-        emoji_bg_img: {
-          backgroundImage: 'url(' + selectedTerm.emoji_a + ')'
-        },
+        emoji_class_name: `${selectedTerm.class}`,
         heading: `Hey, looks like it might snow today. How \'bout ${selectedTerm.term.toLowerCase()} for delivery?`
       });
     } else if ((weatherId >= 800 && weatherId < 900) || (weatherId >= 950 && weatherId <= 955) && currentTemp > 40) {
@@ -150,19 +159,16 @@ class Homepage extends Component {
       this.setState({
         delivery: 0,
         term: `${selectedTerm.term}`,
-        emoji_bg_img: {
-          backgroundImage: 'url(' + selectedTerm.emoji_a + ')'
-        },
+        emoji_class_name: `${selectedTerm.class}`,
         heading:`Hey look, it's nice out! How \'bout ${selectedTerm.term.toLowerCase()}?`
       });
     }
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8000/api/location')
-    .then((response) => {
-      this.setState({position: response.data.location}, function() {
-        axios.get(`http://localhost:8000/api/weather/${this.state.position.lat}/${this.state.position.lng}`)
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({position: position.coords}, function() {
+        axios.get(`https://andres-wdi-project4.herokuapp.com/api/weather/${this.state.position.latitude}/${this.state.position.longitude}`)
         .then((response) => {
           // Set the state of 'weather' to be the value of 'data'
           this.setState({
@@ -178,35 +184,10 @@ class Homepage extends Component {
         .catch((err) => {
           console.log('ERROR: ', err);
         });
-      })
+      });
     })
 
-    // Old code below, kept it here for future reference
 
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //   this.setState({position: position.coords});
-    //
-    //   fetch(`http://localhost:8000/api/weather/${this.state.position.latitude}/${this.state.position.longitude}`, {
-    //     method: 'GET'
-    //   })
-    //   .then((results) => {
-    //     results.json().then((data) => {
-    //       // Set the state of 'weather' to be the value of 'data'
-    //       this.setState({
-    //         weather: data,
-    //         loadIcon: false,
-    //         isLoaded: {
-    //           display: 'block'
-    //         }
-    //       });
-    //       // Source function with core functionality, see above.
-    //       this.getNewOption();
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log('ERROR: ', err);
-    //   })
-    // })
   }
 
   render() {
@@ -217,19 +198,19 @@ class Homepage extends Component {
         />
         <div className="hp-content" style={this.state.isLoaded}>
           <h1>{this.state.heading}</h1>
-          <Link to={`/results/q?lat=${this.state.position.lat}&lng=${this.state.position.lng}&term=${this.state.term}&delivery=${this.state.delivery}`}>
+          <Link to={`/results/q?lat=${this.state.position.latitude}&lng=${this.state.position.longitude}&term=${this.state.term}&delivery=${this.state.delivery}`}>
             <button className="standard-btn">Search for {this.state.term}</button>
           </Link>
           <button className="standard-btn" onClick={this.getNewOption.bind(this)}>Give me another option</button>
         </div>
         <div className="spinning-emoji-container" style={this.state.isLoaded}>
-          <div className="emoji_box emoji_one" style={this.state.emoji_bg_img}></div>
-          <div className="emoji_box emoji_two" style={this.state.emoji_bg_img}></div>
-          <div className="emoji_box emoji_three" style={this.state.emoji_bg_img}></div>
-          <div className="emoji_box emoji_four" style={this.state.emoji_bg_img}></div>
-          <div className="emoji_box emoji_five" style={this.state.emoji_bg_img}></div>
-          <div className="emoji_box emoji_six" style={this.state.emoji_bg_img}></div>
-          <div className="emoji_box emoji_seven" style={this.state.emoji_bg_img}></div>
+          <div className={`emoji_box emoji_one ${this.state.emoji_class_name}`}></div>
+          <div className={`emoji_box emoji_two ${this.state.emoji_class_name}`}></div>
+          <div className={`emoji_box emoji_three ${this.state.emoji_class_name}`}></div>
+          <div className={`emoji_box emoji_four ${this.state.emoji_class_name}`}></div>
+          <div className={`emoji_box emoji_five ${this.state.emoji_class_name}`}></div>
+          <div className={`emoji_box emoji_six ${this.state.emoji_class_name}`}></div>
+          <div className={`emoji_box emoji_seven ${this.state.emoji_class_name}`}></div>
         </div>
       </div>
     );
