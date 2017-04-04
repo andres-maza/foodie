@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import update from 'react-addons-update';
 import axios from 'axios';
 
 

@@ -5,8 +5,8 @@ import { Route, Router, browserHistory } from 'react-router';
 import './styles/normalize.css';
 import './styles/style.css';
 
-import Homepage from './components/Homepage/Homepage.js';
-import SearchResults from './components/SearchResults/SearchResults.js';
+import Homepage from './components/Homepage/Homepage';
+import SearchResults from './components/SearchResults/SearchResults';
 
 ReactDom.render(
   <Router history={browserHistory}>

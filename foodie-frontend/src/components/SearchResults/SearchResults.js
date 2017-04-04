@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Result from './Result.js';
+import Result from './Result';
 import { Link } from 'react-router';
 import axios from 'axios';
 
