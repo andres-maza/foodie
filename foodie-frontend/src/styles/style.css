@@ -65,7 +65,7 @@ p, li {
 .hp-content h1 {
   font-family: 'Merriweather', serif;
   font-weight: 900;
-  font-size: 80px;
+  font-size: 85px;
   letter-spacing: -1px;
 }
 
@@ -94,8 +94,7 @@ p, li {
 }
 
 .search-result {
-  flex: 1;
-  -webkit-flex: 1 1 305px;
+  flex: 1 1 305px;
   border: rgba(0,0,0,0.10) 2px solid;
   margin: 0 7px 14px 7px;
   padding: 25px 25px 33px 25px;
@@ -103,6 +102,7 @@ p, li {
 
 .search-result h2 {
   margin-bottom: 10px;
+  margin-top: 0;
   font-weight: 600;
   letter-spacing: 0.25px;
   font-size: 21px;
@@ -176,8 +176,8 @@ a {
 .emoji_box {
   background-size: cover;
   background-repeat: no-repeat;
-  width: 120px;
-  height: 120px;
+  width: 125px;
+  height: 125px;
   position: absolute;
   animation: spinning-emoji-anim 5s linear infinite;
 }
@@ -370,7 +370,8 @@ a {
 
   .search-result {
     min-width: 0;
-    padding: 0px 15px 25px 15px;
+    flex: 0;
+    padding: 25px 15px 25px 15px;
   }
 
   .standard-btn {

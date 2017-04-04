@@ -1,7 +1,23 @@
+const GoogleLocation = require('../../services/geolocation.js');
 const YelpService = require('../../services/yelp.js');
 const WeatherService = require('../../services/weather.js');
 
 let controller = {};
+
+// Runs Google Geolocation API request
+controller.coords = (req, res) => {
+  GoogleLocation
+  .getCoords()
+  .then(r => r.json())
+  .then((data) => {
+    res.json(data);
+  })
+  .catch((err) => {
+    res
+    .status(400)
+    .json(err)
+  });
+}
 
 // Runs Yelp API search
 controller.yelp = (req, res) => {

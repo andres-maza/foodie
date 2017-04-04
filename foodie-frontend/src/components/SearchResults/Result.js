@@ -5,7 +5,11 @@ const Result = (props) => {
   let starRating = [];
 
   for (let i = 0; i < Math.floor(props.rating); i++) {
-    starRating.push(<i className="fa fa-star-o"></i>);
+    starRating.push(<i className="fa fa-star"></i>);
+  }
+
+  if (props.rating%1 != 0) {
+    starRating.push(<i className="fa fa-star-half-o"></i>)
   }
 
   return(

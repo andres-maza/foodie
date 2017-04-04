@@ -160,46 +160,54 @@ class Homepage extends Component {
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.setState({position: position.coords});
-
-      // fetch(`http://localhost:8000/api/weather/${this.state.position.latitude}/${this.state.position.longitude}`, {
-      //   method: 'GET'
-      // })
-      // .then((results) => {
-      //   results.json().then((data) => {
-          // // Set the state of 'weather' to be the value of 'data'
-          // this.setState({
-          //   weather: data,
-          //   loadIcon: false,
-          //   isLoaded: {
-          //     display: 'block'
-          //   }
-          // });
-          // // Source function with core functionality, see above.
-          // this.getNewOption();
-      //   });
-      // })
-      // .catch((err) => {
-      //   console.log('ERROR: ', err);
-      // })
-      axios.get(`http://localhost:8000/api/weather/${this.state.position.latitude}/${this.state.position.longitude}`)
-      .then((response) => {
-        // Set the state of 'weather' to be the value of 'data'
-        this.setState({
-          weather: response.data,
-          loadIcon: false,
-          isLoaded: {
-            display: 'block'
-          }
+    axios.get('http://localhost:8000/api/location')
+    .then((response) => {
+      this.setState({position: response.data.location}, function() {
+        axios.get(`http://localhost:8000/api/weather/${this.state.position.lat}/${this.state.position.lng}`)
+        .then((response) => {
+          // Set the state of 'weather' to be the value of 'data'
+          this.setState({
+            weather: response.data,
+            loadIcon: false,
+            isLoaded: {
+              display: 'block'
+            }
+          });
+          // Source function with core functionality, see above.
+          this.getNewOption();
+        })
+        .catch((err) => {
+          console.log('ERROR: ', err);
         });
-        // Source function with core functionality, see above.
-        this.getNewOption();
       })
-      .catch((err) => {
-        console.log('ERROR: ', err);
-      });
     })
+
+    // Old code below, kept it here for future reference
+
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //   this.setState({position: position.coords});
+    //
+    //   fetch(`http://localhost:8000/api/weather/${this.state.position.latitude}/${this.state.position.longitude}`, {
+    //     method: 'GET'
+    //   })
+    //   .then((results) => {
+    //     results.json().then((data) => {
+    //       // Set the state of 'weather' to be the value of 'data'
+    //       this.setState({
+    //         weather: data,
+    //         loadIcon: false,
+    //         isLoaded: {
+    //           display: 'block'
+    //         }
+    //       });
+    //       // Source function with core functionality, see above.
+    //       this.getNewOption();
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log('ERROR: ', err);
+    //   })
+    // })
   }
 
   render() {
@@ -210,7 +218,7 @@ class Homepage extends Component {
         />
         <div className="hp-content" style={this.state.isLoaded}>
           <h1>{this.state.heading}</h1>
-          <Link to={`/results/q?lat=${this.state.position.latitude}&lng=${this.state.position.longitude}&term=${this.state.term}&delivery=${this.state.delivery}`}>
+          <Link to={`/results/q?lat=${this.state.position.lat}&lng=${this.state.position.lng}&term=${this.state.term}&delivery=${this.state.delivery}`}>
             <button className="standard-btn">Search for {this.state.term}</button>
           </Link>
           <button className="standard-btn" onClick={this.getNewOption.bind(this)}>Give me another option</button>
