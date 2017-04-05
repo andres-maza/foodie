@@ -3,10 +3,13 @@ import React from 'react';
 const Result = (props) => {
   let starRating = [];
 
+  // Rating comes back as an interger or float
+  // Round down the rating and with a for loop, array.push() a star icon, 'x' amount of times into starRating
   for (let i = 0; i < Math.floor(props.rating); i++) {
     starRating.push(<i className="fa fa-star"></i>);
   }
 
+  // If rating is floated number add half star at the end of the array
   if (props.rating%1 != 0) {
     starRating.push(<i className="fa fa-star-half-o"></i>)
   }

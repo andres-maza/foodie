@@ -20,15 +20,14 @@ class SearchResults extends Component {
     axios.get(`https://andres-wdi-project4.herokuapp.com/api/yelp/q?lat=${this.props.location.query.lat}&lng=${this.props.location.query.lng}&term=${this.props.location.query.term}&delivery=${this.props.location.query.delivery}`)
     .then((response) => {
       if(!response.data.length || response.data.length === 0){
-        // If data is undefined or data is an empty array, display error page_title.
-        console.log(response.data);
+        // ERROR HANDLING: If data is undefined or data is an empty array, display error page_title.
         this.setState({
           page_title: `Looks like there is no "${this.props.location.query.term.toLowerCase()}" near you at this moment.`,
           loadIcon: false
         });
       } else {
+        // If data is an array with a length greater than 0, set state to match result.
         this.setState({
-          // If data is an array with a length greater than 0, set state to match result.
           results: response.data,
           page_title: `Here's a list of places for "${this.props.location.query.term.toLowerCase()}" ${parseInt(this.props.location.query.delivery) ? 'with delivery available' : ''}`,
           loadIcon: false
@@ -38,47 +37,18 @@ class SearchResults extends Component {
     .catch((err) => {
       console.log('ERROR: ', err)
     });
-    // Old code below, kept here for futher reference
-
-    // fetch(`http://localhost:8000/api/yelp/q?lat=${this.props.location.query.lat}&lng=${this.props.location.query.lng}&term=${this.props.location.query.term}&delivery=${this.props.location.query.delivery}`, {
-    //   method: 'GET'
-    // })
-    // .then((results) => {
-    //   results.json().then((data) => {
-    //     if (!data.length || data.length === 0){
-    //       // If data is undefined or data is an empty array, display error page_title.
-    //       console.log(data);
-    //       this.setState({
-    //         page_title: `Looks like there is no "${this.props.location.query.term.toLowerCase()}" near you at this moment.`,
-    //         loadIcon: false
-    //       })
-    //     } else {
-    //       // If data is an array with a length greater than 0, set state to match result.
-    //       this.setState({
-    //         results: data,
-    //         page_title: `Here's a list of places for "${this.props.location.query.term.toLowerCase()}" ${parseInt(this.props.location.query.delivery) ? 'with delivery available' : ''}`,
-    //         loadIcon: false
-    //       });
-    //     }
-    //   })
-    // })
-    // .catch((err) => {
-    //   res
-    //   .status(400)
-    //   .json(err)
-    // });
   }
 
   render() {
     return(
       <div className="container">
-          <LoadingAnim
-            display={this.state.loadIcon}
-          />
+        <LoadingAnim
+          display={this.state.loadIcon}
+        />
         <h1>{this.state.page_title}</h1>
         <div className="results-container">
-        {this.state.results.map((result) => {
-          return(
+          {this.state.results.map((result) => {
+            return(
               <Result
                 key={result.id}
                 name={result.name}
@@ -95,8 +65,8 @@ class SearchResults extends Component {
                 delivery={result.transactions.indexOf('delivery', 0) != -1 ? 'Yes' : 'No'}
                 url={result.url}
               />
-          )
-        })}
+            )
+          })}
         </div>
         {!this.state.loadIcon ? <h4>Can't find what you're looking for? <Link to="/">Search for something else</Link></h4> : ''}
       </div>

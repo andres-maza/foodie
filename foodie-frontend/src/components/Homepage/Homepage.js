@@ -25,81 +25,66 @@ class Homepage extends Component {
           {
             term: 'Sushi',
             class: 'sushi-emoji'
-            // emoji_a: '../assets/sushi.png'
           },
           {
             term: 'Comfort Food',
             class: 'comfort-food-emoji'
-            // emoji_a: '../assets/comfort-food.png'
           },
           {
             term: 'Ramen',
             class: 'ramen-emoji'
-            // emoji_a: '../assets/ramen.png'
           },
           {
             term: 'Pizza',
             class: 'pizza-emoji'
-            // emoji_a: '../assets/pizza.png'
           },
           {
             term: 'Mexican Food',
             class: 'mexican-food-emoji'
-            // emoji_a: '../assets/mexican-food.png'
           }
         ],
         snow: [
           {
             term: 'Soup Dumplings',
             class: 'soup-dumpling-emoji'
-            // emoji_a: '../assets/soup-dumplings.png'
           },
           {
             term: 'Ramen',
             class: 'ramen-emoji'
-            // emoji_a: '../assets/ramen.png'
           },
           {
             term: 'Pizza',
             class: 'pizza-emoji'
-            // emoji_a: '../assets/pizza.png'
           },
           {
             term: 'Italian Food',
             class: 'italian-food-emoji'
-            // emoji_a: '../assets/italian-food.png'
           },
           {
             term: 'Comfort Food',
             class: 'comfort-food-emoji'
-            // emoji_a: '../assets/comfort-food.png'
           }
         ],
         clear: [
           {
             term: 'Burgers',
             class: 'burgers-emoji'
-            // emoji_a: '../assets/burger.png'
           },
           {
             term: 'Hot Dogs',
             class: 'hot-dogs-emoji'
-            // emoji_a: '../assets/hot-dog.png'
           },
           {
             term: 'BBQ',
             class: 'bbq-emoji'
-            // emoji_a: '../assets/bbq.png'
           },
           {
             term: 'Sushi',
             class: 'sushi-emoji'
-            // emoji_a: '../assets/sushi.png'
           },
           {
             term: 'Tacos',
             class: 'tacos-emoji'
-            // emoji_a: '../assets/taco.png'
           }
         ]
       },
@@ -123,7 +108,7 @@ class Homepage extends Component {
       // Weather condition for 'Rain' & 'Thunderstorm'
       // Select term at random from array of 'rain'
       let selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)];
-      // While selectedTerm matches current term on state, continue to randomize. (This pervents getting the same number consecutively)
+      // While selectedTerm matches current term on state, continue to randomize (this pervents getting the same number consecutively).
       while (selectedTerm.term === this.state.term) {
         selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)];
       }
@@ -185,9 +170,7 @@ class Homepage extends Component {
           console.log('ERROR: ', err);
         });
       });
-    })
-
-
+    });
   }
 
   render() {
