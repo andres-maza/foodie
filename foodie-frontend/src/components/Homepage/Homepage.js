@@ -119,8 +119,8 @@ class Homepage extends Component {
     // Select items inside object of food_options
     let foodOpts = this.state.food_options;
 
-    if ((weatherId >= 300 && weatherId < 600) || (weatherId >= 700 && weatherId < 800)) {
-      // Weather condition for 'Rain'
+    if ((weatherId >= 200 && weatherId < 600) || (weatherId >= 700 && weatherId < 800)) {
+      // Weather condition for 'Rain' & 'Thunderstorm'
       // Select term at random from array of 'rain'
       let selectedTerm = foodOpts.rain[Math.floor(Math.random() * foodOpts.rain.length)];
       // While selectedTerm matches current term on state, continue to randomize. (This pervents getting the same number consecutively)
